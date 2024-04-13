@@ -6,7 +6,7 @@ def create_connection():
     try:
         """ create a database connection to database """
         # Встановлюємо з'єднання з базою даних PostgreSQL
-        conn = psycopg2.connect(host="localhost", database="postgres", user="postgres", password="pass")
+        conn = psycopg2.connect(host="localhost", database="postgres", user="postgres", password="pass", port=5432)
         yield conn  # Повертаємо з'єднання для використання в блоку with
         conn.close()  # Закриваємо з'єднання після завершення роботи з ним
     except psycopg2.OperationalError as err:
