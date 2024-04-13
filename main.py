@@ -45,6 +45,22 @@ if __name__ == "__main__":
             print("\nЗапит 4\nСередній бал на потоці (по всій таблиці оцінок)")
             print(f"Середній бал: {result[0]}")
 
+            # Виконання 5 запиту
+            query = read_sql_file('query_05.sql')
+            cur.execute(query)
+            result = cur.fetchall()
+            print("\nЗапит 5\nЯкі курси читає певний викладач")
+            for res in result:
+                print(f"ID: {res[0]}, ПІБ: {res[1]}, Предмет: {res[2]}")
+            
+            # Виконання 6 запиту
+            query = read_sql_file('query_06.sql')
+            cur.execute(query)
+            result = cur.fetchall()
+            print("\nЗапит 6\nСписок студентів у певній групі")
+            for res in result:
+                print(f"ID: {res[0]}, ПІБ: {res[1]}, Група: {res[2]}")
+
 
             try:
         # Збереження змін у базі даних
