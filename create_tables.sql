@@ -1,28 +1,34 @@
+drop table if exists Groups CASCADE;
+CREATE TABLE Groups ( 
+    id SERIAL PRIMARY KEY,
+    group_name VARCHAR(100) NOT NULL
+);
+
+drop table if exists Students CASCADE;
 CREATE TABLE Students (
-    student_id SERIAL PRIMARY KEY,
-    name VARCHAR(100)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    group_id INTEGER REFERENCES groups(id)
 );
 
-CREATE TABLE Groups (
-    group_id SERIAL PRIMARY KEY,
-    group_name VARCHAR(100)
-);
-
+drop table if exists Professors CASCADE;
 CREATE TABLE Professors (
-    professor_id SERIAL PRIMARY KEY,
-    name VARCHAR(100)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
 );
 
+drop table if exists Subjects CASCADE;
 CREATE TABLE Subjects (
-    subject_id SERIAL PRIMARY KEY,
-    subject_name VARCHAR(100),
-    professor_id INT REFERENCES Professors(professor_id)
+    id SERIAL PRIMARY KEY,
+    subject_name VARCHAR(100) NOT NULL, 
+    professor_id INT REFERENCES Professors(id)
 );
 
+drop table if exists Grades CASCADE;
 CREATE TABLE Grades (
-    grade_id SERIAL PRIMARY KEY,
-    student_id INT REFERENCES Students(student_id),
-    subject_id INT REFERENCES Subjects(subject_id),
-    grade FLOAT,
-    date_received DATE
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES Students(id) ON DELETE CASCADE,
+    subject_id INT REFERENCES Subjects(id) ON DELETE CASCADE,
+    grade INTEGER CHECK (grade >= 0 AND grade <= 100),
+    date_received DATE NOT NULL
 );
