@@ -17,8 +17,10 @@ def create_table(conn, create_table_sql):
     except DatabaseError as e:
         logging.error(e)
         conn.rollback()
-
         print(e)
+    finally:
+        c.close()
+
 
 
 if __name__ == '__main__':
