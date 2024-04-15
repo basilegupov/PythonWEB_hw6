@@ -1,7 +1,7 @@
-SELECT Students.name AS student_name, Grades.grade
+SELECT Subjects.subject_name, Groups.group_name, Students.name AS student_name, Grades.grade
 FROM Students
-JOIN Grades ON Students.student_id = Grades.student_id
-JOIN Groups ON Students.group_id = Groups.group_id
-JOIN Subjects ON Grades.subject_id = Subjects.subject_id
+JOIN Grades ON Students.id = Grades.student_id
+JOIN Groups ON Students.group_id = Groups.id
+JOIN Subjects ON Grades.subject_id = Subjects.id
 WHERE Groups.group_name = 'Group B' AND Subjects.subject_name = 'Mathematics';
 
