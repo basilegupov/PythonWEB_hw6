@@ -1,4 +1,5 @@
-from sqlite3 import Error
+import logging
+from psycopg2 import DatabaseError
 
 from connect import create_connection, read_sql_file
 
@@ -13,7 +14,10 @@ def create_table(conn, create_table_sql):
         c = conn.cursor()
         c.execute(create_table_sql)
         conn.commit()
-    except Error as e:
+    except DatabaseError as e:
+        logging.error(e)
+        conn.rollback()
+
         print(e)
 
 
